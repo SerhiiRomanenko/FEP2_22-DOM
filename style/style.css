@@ -29,9 +29,8 @@ a {
 .main {
   min-height: calc(100vh - 182px); }
   .main__wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex; }
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr; }
 
 .form {
   border-radius: 10px;
@@ -80,8 +79,20 @@ label {
     padding: 10px; }
 
 .products {
-  min-width: 200px;
-  text-align: center; }
+  min-width: 600px;
+  margin-top: 30px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; }
+  .products__title {
+    font-weight: bold; }
+
+.aboutProduct {
+  margin-top: 38px;
+  margin-left: 30px;
+  text-align: justify; }
+  .aboutProduct__button {
+    margin-top: 20px; }
 
 .footer {
   color: wheat; }

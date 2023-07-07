@@ -360,7 +360,7 @@ categoriesMurkUp.className = "categories__list";
 function validatePIB(input) {
     const resName = input.value.trim();
     const errMessage = document.querySelector(".form__errorPIB");
-    if (  resName.length > 1 &&
+    if (resName.length > 1 &&
         resName.includes(" ") &&
         !/[0-9\\!@#$%^&*()-+:;_"'`|=]/.test(resName)) {
         errMessage.style.display = "none";
@@ -396,6 +396,7 @@ function validatePostNumber(postNumbers) {
     $errorPostNumber.style.display = "inline";
     return false;
 }
+
 function getChechedRadio(radios) {
     for (const elem of radios) {
         if (elem.checked) {
@@ -408,19 +409,18 @@ categoriesMurkUp.addEventListener("click", function (event) {
     activeCategory = event.target.innerText;
 
 
-    let productMurkUp = document.createElement("div");
     if (categories.includes(activeCategory) && activeCategory !== null) {
-        productSection.innerHTML = "";
+        productSection.innerHTML = '';
+        aboutProduct.innerHTML = '';
         for (let product of products) {
             if (product.category === activeCategory) {
-                productMurkUp.innerHTML += `<div class="produsts__item">
-                                        <p class="produsts__title">${product.name}</p>
-                                        <p class="produsts__price">${product.price}</p>
-                                        <button class="produsts__buyButton" value=${product.id} onclick=setActiveProduct(${product.id})>Детально</button>
+                productSection.innerHTML += `<div class="products__item">
+                                        <p class="products__title">${product.name}</p>
+                                        <p class="products__price">${product.price} грн</p>
+                                        <button class="products__buyButton" value=${product.id} onclick=setActiveProduct(${product.id})>Детально</button>
                                     </div>`;
             }
         }
-        productSection.append(productMurkUp);
     }
 });
 
@@ -456,14 +456,14 @@ $submitButton.addEventListener("click", function (event) {
         Кількість товарів: ${$countInput.value},
         Ваш коментар: ${$commentInput.value}`;
         alert(resultInfo)
-    window.location.assign("index.html");
+        window.location.assign("index.html");
     }
 })
 
 $canselButton.addEventListener("click", function (event) {
     event.preventDefault();
     $form.reset();
-    $allErrorMessage.forEach((item)=> item.style.display = "none")
+    $allErrorMessage.forEach((item) => item.style.display = "none")
     $form.style.display = "none";
     $pibInput.style.border = "1px solid black";
     document.querySelector(".main__wrapper").style.display = "flex";

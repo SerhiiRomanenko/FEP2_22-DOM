@@ -46,7 +46,8 @@ a {
   min-height: calc(100vh - 182px);
 
   &__wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr
   }
 }
 
@@ -107,20 +108,29 @@ label {
   &__item {
     padding: 10px;
   }
-
-  &__link {
-  }
 }
 
 .products {
-  min-width: 200px;
+  min-width: 600px;
+  margin-top: 30px;
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  &__title {
+    font-weight: bold;
+  }
 }
 
 .aboutProduct {
+  margin-top: 38px;
+  margin-left: 30px;
+  text-align: justify;
 
+  &__button {
+    margin-top: 20px;
+  }
 }
-
 //----------------------------------------FOOTER----------------------------------------------//
 
 .footer {
