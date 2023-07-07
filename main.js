@@ -346,6 +346,9 @@ const $pibInput = document.querySelector(".form__pib");
 const $cities = document.querySelectorAll(".form__city");
 const $allErrorMessage = document.querySelectorAll("small");
 const $postNumber = document.querySelectorAll(".form__post");
+const $countInput = document.querySelector(".form__count");
+const $typesOfPay = document.getElementsByName("typeOfPay");
+const $commentInput = document.querySelector(".form__comments");
 const $submitButton = document.querySelector(".form__submit");
 const $canselButton = document.querySelector(".form__cansel");
 
@@ -358,7 +361,7 @@ function validatePIB(input) {
     const resName = input.value.trim();
     const errMessage = document.querySelector(".form__errorPIB");
     if (  resName.length > 1 &&
-        !resName.includes(" ") &&
+        resName.includes(" ") &&
         !/[0-9\\!@#$%^&*()-+:;_"'`|=]/.test(resName)) {
         errMessage.style.display = "none";
         $pibInput.style.border = "1px solid black";
@@ -393,6 +396,13 @@ function validatePostNumber(postNumbers) {
     $errorPostNumber.style.display = "inline";
     return false;
 }
+function getChechedRadio(radios) {
+    for (const elem of radios) {
+        if (elem.checked) {
+            return elem.value;
+        }
+    }
+}
 
 categoriesMurkUp.addEventListener("click", function (event) {
     activeCategory = event.target.innerText;
@@ -413,6 +423,7 @@ categoriesMurkUp.addEventListener("click", function (event) {
         productSection.append(productMurkUp);
     }
 });
+
 let listMarkup = "";
 for (let i = 0; i < categories.length; i++) {
     let a = document.createElement("a");
@@ -439,8 +450,11 @@ $submitButton.addEventListener("click", function (event) {
     if (isValidPIB && isValidCity && isValidPostNumber) {
         resultInfo = `Інформація про доставку: 
         ПІБ: ${isValidPIB} 
-        Місто: ${isValidCity} 
-        Поштове відділення: ${isValidPostNumber}`;
+        Місто: ${isValidCity}, 
+        Поштове відділення: ${isValidPostNumber},
+        Спосіб оплати: ${getChechedRadio($typesOfPay)}
+        Кількість товарів: ${$countInput.value},
+        Ваш коментар: ${$commentInput.value}`;
         alert(resultInfo)
     window.location.assign("index.html");
     }
@@ -451,6 +465,7 @@ $canselButton.addEventListener("click", function (event) {
     $form.reset();
     $allErrorMessage.forEach((item)=> item.style.display = "none")
     $form.style.display = "none";
+    $pibInput.style.border = "1px solid black";
     document.querySelector(".main__wrapper").style.display = "flex";
 })
 
@@ -472,3 +487,7 @@ function buyProduct() {
     $form.style.display = "flex";
     document.querySelector(".main__wrapper").style.display = "none";
 }
+
+$pibInput.addEventListener("keydown", function () {
+    console.log(validatePIB($pibInput))
+})
